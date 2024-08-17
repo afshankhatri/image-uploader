@@ -1,0 +1,128 @@
+<!-- problems:
+        1st div gets disappeared after many inputs are taken 
+
+        multiple images cannot be uploaded at once ...(multiple images need's to be uploaded one by one)
+
+        if i try to keep the 1st div's position 'fixed' then after after 3-4 photos ...one or the other photo gets hidden behind the 1st div.........i want that ,if i keep the div 'fixed' then elements should scroll but should not get hidden behind ...the part which is hidden should get visible from the other part ....(just as snake game of nokia...as soon as it gets into the wall it returns from the opposite wall..)something like this
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAG AND DROP multiple files</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .base{
+            height: 350px;
+            width: 1000px;
+            padding-right: 10px;
+            padding-left: 10px;
+            background-color: yellowgreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            
+
+        }
+        .pic{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 250px;
+            width: 250px;
+            background-color: yellow;
+            margin-left: 10px;
+            flex-shrink: 0;
+            text-align: center;
+            /* i've added position fixed in div itself */
+        }
+        .base::-webkit-scrollbar{
+            height: 10px;
+        }
+        .base::-webkit-scrollbar-thumb{
+            background-color: darkolivegreen;
+            border-radius: 10px;
+        }
+        label{            
+            height: 250px;
+            width: 250px;
+            display: block;
+            cursor: pointer;
+        }
+        i{
+            margin: 10px;
+            font-size: 100px;
+        }
+        input{
+        display: none;
+        }
+        img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 250px;
+            width: 250px;
+            flex-shrink: 0;
+            text-align: center;
+            margin: 10px;
+            /* i've added position fixed in div itself */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="base" id="ground">
+        <div class="pic" id="picture" style="margin-left: 50px;">
+            <label for="multiDROP">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <h3>drag and drop <br>or <br>upload and image</h3>
+                <input type="file" name="" id="multiDROP">
+            </label>
+        </div>
+    
+    <script>
+        const base = document.querySelector('.base')
+        const pic = document.querySelector('.pic')
+        const label = document.querySelector('label')
+        const hT = document.querySelector('h3')
+        const input = document.querySelector('#multiDROP')
+
+        input.onchange =function(){
+            const img = document.createElement('img')
+            img.src = URL.createObjectURL(input.files[0])
+            base.appendChild(img)
+        }
+
+        label.addEventListener('dragover',function(e){
+            e.preventDefault()
+        })
+        label.addEventListener('drop',function(e){
+            e.preventDefault()
+            input.files = e.dataTransfer.files
+            input.onchange()
+        })
+
+
+    </script>
+<script src="https://kit.fontawesome.com/b243bff3de.js" crossorigin="anonymous"></script>
+</body>
+</html>

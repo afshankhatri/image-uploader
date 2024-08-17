@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image uploader</title>
+    <style>
+        .uploader{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+
+        }
+        input {
+            display: none;
+        }
+        label{
+            height: 50px;
+            width: 200px;
+            max-width: 200px;
+            border-radius: 10px;
+            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: chocolate;
+            cursor: pointer;
+        }
+        button{
+            height: 50px;
+            width: 200px;
+            max-width: 200px;
+            border-radius: 10px;
+            background-color: white;
+            border: none;
+            font-size:23px;
+            color: beige;
+            cursor: pointer;
+        }
+        .default{
+            height: 200px;
+            width: 200px;
+            margin: 20px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="uploader" id="uplod">
+        <img src="" class="default">
+        <button>
+            <label for="select" class="lab" >upload</label>
+        </button>
+        <button id="refresh" style="color: black;" onclick="location.reload()"><i class="fa-solid fa-arrows-rotate"></i></button>
+        <input type="file" accept='image/jpg,image/jpeg,image/png' class="choose" id="select">  <!-- we cannot directly adjust the size of this button for this we need to use label tag -->
+        <h3 id="write">choose.file</h3>
+    </div>
+    
+    <script>
+        const img = document.querySelector('.default')
+        const wText = document.querySelector('#write')
+        const input = document.querySelector('.choose')
+        
+        input.onchange = function(){
+            img.src = URL.createObjectURL(input.files[0])
+            wText.innerHTML = `${input.files[0].name}`
+        }
+
+    </script>
+     <script src="https://kit.fontawesome.com/b243bff3de.js" crossorigin="anonymous"></script>
+</body>
+</html>

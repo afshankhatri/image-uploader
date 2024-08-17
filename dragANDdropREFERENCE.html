@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag and drop</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .base{
+            width: 600px;
+            height: 400px;
+            background-color: lightsalmon;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #icon{
+            font-size: 100px;
+        }
+        h3{
+            margin: 10px;
+        }
+        input{
+            display: none;
+        }
+        label{
+            width: 500px;
+            height: 300px;
+            background-color: khaki;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border:2px dotted blueviolet;
+            cursor: pointer;
+        }img{
+            width: 500px;
+            height: 300px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="base" id="ground">
+            <label for="uplod">
+                <input type="file" accept="/image.jpeg,/image.png,/image.jpg" id="uplod">
+                <div class="imgPNG">
+                    <i class="fa-solid fa-upload" id="icon"></i>
+                    <h3>Drag and Drop a file or upload a file</h3>
+                </div>
+            </label>
+    </div>
+
+
+    <script>
+        const imgDIV = document.querySelector('.imgPNG')
+        const inpIm =document.querySelector('#uplod')
+        const label = document.querySelector('label')
+        const I = document.querySelector('i')
+        const HT = document.querySelector('h3')
+        inpIm.onchange =function(){
+            I.remove()
+            HT.remove() //HT.innerHTML=''
+            const img = document.createElement('img')
+            img.src = URL.createObjectURL(inpIm.files[0])
+            imgDIV.appendChild(img)
+        }
+
+    </script>
+    <script src="https://kit.fontawesome.com/b243bff3de.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>

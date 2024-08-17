@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag and drop</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .base{
+            width: 600px;
+            height: 400px;
+            background-color: lightsalmon;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        /* #icon{
+            font-size: 100px;
+        } */
+        h3{
+            margin: 10px;
+        }
+        input{
+            display: none;
+        }
+        label{
+            width: 500px;
+            height: 300px;
+            background-color: khaki;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border:2px dotted blueviolet;
+            cursor: pointer;
+        }img{
+            width: 500px;
+            height: 300px;
+            border-radius: 20px;
+            display: block;
+        }
+        .texT{position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="base" id="ground">
+        <div class="imgPNG">
+            <label for="uplod">
+                <input type="file" accept="/image.jpeg,/image.png,/image.jpg" id="uplod">
+                    <!-- <i class="fa-solid fa-upload" id="icon"></i> -->
+                     <img src="" alt="">
+                    
+                <div class="texT"><h3>Drag and Drop a file or upload a file</h3></div>
+            </label>
+        </div>
+        
+    </div>
+    <button style="margin: 10px;border: none; background-color: bisque;border-radius: 20px;height: 30px;width: 60px;" onclick="location.reload()">refresh</button>
+    
+
+
+    <script>
+        const imgDIV = document.querySelector('.imgPNG')
+        const inpIma =document.querySelector('#uplod')
+        const label = document.querySelector('label')
+        const HT = document.querySelector('h3')
+        const imgeshow = document.querySelector('img')
+        //display image and drag and drop feature
+        inpIma.onchange =function(){
+            HT.remove()//HT.innerHTML = ''
+            imgeshow.src = URL.createObjectURL(inpIma.files[0])
+
+
+        }
+        label.addEventListener('dragover',function(e){
+            e.preventDefault()
+        })// label.dragover = function(e){
+        label.addEventListener('drop',function(e){
+            e.preventDefault()
+            inpIma.files = e.dataTransfer.files
+            inpIma.onchange()
+        })
+
+    </script>
+    <script src="https://kit.fontawesome.com/b243bff3de.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>

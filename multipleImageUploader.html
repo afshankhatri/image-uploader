@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multiple Image Uploader</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .base{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .frame{
+            height: 350px;
+            width: 350px;
+            padding: 5px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: space-between;
+            flex-wrap: wrap;
+            overflow: auto; /* Enable scrollbar */
+        }
+        .frame::-webkit-scrollbar{
+            width: 5px;
+        }
+        .frame::-webkit-scrollbar-thumb{
+            background-color: coral;
+            border-radius: 10px;
+        }
+        img {
+            height: 100px;
+            width: 100px;
+            background-color: aquamarine;
+            margin-bottom: 5px;
+        }
+        .uplod{
+            margin-top: 50px;
+        }
+        input{
+            display: none;
+        }
+        label{
+            height: 50px;
+            width: 200px;
+            display: block; /*this is very imp tag to increase the size of the label*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .imagesPlace{
+            position: relative;
+        }
+        i{
+            color: chocolate;
+            position:absolute;
+            right: 0px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="base" id="BAS">    
+        <div class="frame" id="ground">
+            <div class="imagesPlace" id="cell1">
+                <img src="/1_exampleOfConsoleInBrowser.png" alt="">
+                <i class="fa-regular fa-square-minus"></i><!-- while using this class in js or css use the class name as "fa-square-minus" ... dont write full name since it has spce in b/w  -->
+
+            </div>
+            <div class="imagesPlace" id="cell2">
+                <img src="/2_exampleOfConsoleInBrowser.png" alt="">
+                <i class="fa-regular fa-square-minus"></i>
+            </div>
+        </div>
+        <div class="uplod">
+            <button>
+                <label for="fileOFimage">upload</label>
+            </button>
+            <input type="file" id="fileOFimage">
+        </div>
+    </div>
+
+    <script>
+
+        // given below is the example of how can we remove elemenets when placed statically 
+        const iTag = document.querySelectorAll('.fa-square-minus')
+        const photodel = document.querySelector('.imagesPlace')
+        iTag.forEach(icon => { //we need to use foreach loop to iterate through all the images otherwise only one image will get removed and rest will remain the same
+                    icon.addEventListener('click',function(){
+                    icon.parentElement.remove()
+                })
+            });
+
+
+        const button = document.querySelector('button')
+        const inputAREA = document.querySelector('#fileOFimage')
+        const imagesPlace = document.querySelector('.imagesPlace')
+        const frame = document.querySelector('.frame')
+        const img = document.querySelector('img')
+
+        inputAREA.onchange = function(){
+            const imgDIV = document.createElement('div')
+            imgDIV.className='imagesPlace'
+
+            const imag = document.createElement('img')
+            imag.src = URL.createObjectURL(inputAREA.files[0])
+
+            const I = document.createElement('i')
+            I.className = 'fa-regular fa-square-minus'
+
+
+            imgDIV.appendChild(imag)
+            imgDIV.appendChild(I)
+            frame.appendChild(imgDIV)
+
+            // to remove the images which are placed dinamically
+            I.addEventListener('click', function() {
+                I.parentElement.remove();
+                console.log('Removed');
+            });
+        }
+
+        
+    </script>
+    <script src="https://kit.fontawesome.com/b243bff3de.js" crossorigin="anonymous"></script>
+</body>
+</html>
